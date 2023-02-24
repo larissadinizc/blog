@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fotolog</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+        <h1>Fotolog</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li id="login"><a href="#">Login</a></li>
+                <li id="logout" style="display: none;"><a href="#">Logout</a></li>
+            </ul>
+            <form id="login-form" style="display: none;">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password">
+                <input type="submit" value="Login">
+            </form>
+        </nav>
+    </header>
+    <script>
+        const loginLink = document.getElementById("login");
+        const logoutLink = document.getElementById("logout");
+        const loginForm = document.getElementById("login-form");
+    
+        loginLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            loginForm.style.display = "block";
+        });
+    
+        loginForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username === "admin" && password === "admin1234") {
+                localStorage.setItem("isLoggedIn", true);
+                loginForm.style.display = "none";
+                loginLink.style.display = "none";
+                logoutLink.style.display = "block";
+            } else {
+                alert("Usuário ou senha incorretos!");
+            }
+        });
+    
+        logoutLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            localStorage.removeItem("isLoggedIn");
+            loginLink.style.display = "block";
+            logoutLink.style.display = "none";
+        });
+    </script>
+    
+	<main>
+		<section>
+			<h2>Últimas Postagens</h2>
+			<article>
+				<h3>Título da Postagem</h3>
+				<p>Texto da postagem</p>
+			</article>
+			<article>
+				<h3>Título da Postagem</h3>
+				<p>Texto da postagem</p>
+			</article>
+			<article>
+				<h3>Título da Postagem</h3>
+				<p>Texto da postagem</p>
+			</article>
+		</section>
+		<aside>
+			<h2>Arquivos</h2>
+			<ul>
+				<li><a href="#">Janeiro 2023</a></li>
+				<li><a href="#">Fevereiro 2023</a></li>
+				<li><a href="#">Março 2023</a></li>
+			</ul>
+		</aside>
+	</main>
+	<footer>
+		<p>&copy; Blog 2023</p>
+	</footer>
+</body>
+</html>
